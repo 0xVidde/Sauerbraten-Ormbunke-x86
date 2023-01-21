@@ -120,8 +120,6 @@ Player* LocalPlayer::GetClosestEnemyByFov(float fov) {
         if (diffs.x < -180)
             diffs.x += 360;
 
-        std::cout << diffs.Length2D() << std::endl;
-
         if (diffs.Length2D() > fov)
             continue;
 
