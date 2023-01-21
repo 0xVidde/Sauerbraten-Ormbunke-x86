@@ -14,7 +14,8 @@ A quite basic internal C++ cheat for the game Sauerbraten that utilizes ImGui fo
 
         [END] << Close
 
-        FEATURES
+
+        --- FEATURES ---
         Box ESP
         Filled Box ESP
         Tracer ESP
