@@ -17,14 +17,16 @@
 #include "Include/kiero/minhook/include/MinHook.h"
 
 #pragma region Config
-float conf_smoothing = 10;
-bool conf_SMOOTH = true;
-bool conf_AIMBOT_ON = false;
-bool conf_FOV_AIMBOT_ON = false;
-float conf_Aimbot_FOV = 30;
-bool conf_Draw_FOV_Circle = true;
 
-bool conf_ESP_ON = false;
+bool conf_AIMBOT_ON = false;
+bool conf_SMOOTH = true;
+float conf_smoothing = 10;
+
+bool conf_FOV_AIMBOT_ON = false;
+bool conf_Draw_FOV_Circle = true;
+float conf_Aimbot_FOV = 30;
+
+bool conf_ESP_ON = true;
 
 bool conf_Draw2DBox = false;
 bool conf_Draw2DFilledBox = false;
@@ -38,6 +40,7 @@ ImColor conf_TextColor = ImColor(0, 0, 255);
 ImColor conf_TracerColor = ImColor(255, 0, 0);
 ImColor conf_BoxColor = ImColor(0, 255, 0);
 ImColor conf_FilledBoxColor = ImColor(0, 255, 0, 70);
+
 #pragma endregion
 
 void Aimbot(LocalPlayer* localPlayer) {
@@ -251,7 +254,7 @@ void RenderMain()
                 pDrawList->AddCircle(ImVec2(headPos.x, headPos.y), 4.5, ImColor(255, 255, 255));
 
             if (conf_DrawSpine)
-                pDrawList->AddLine(ImVec2(headPos.x, headPos.y), ImVec2(boxBottomPos.x, boxBottomPos.y), ImColor(255, 0, 0));
+                pDrawList->AddLine(ImVec2(headPos.x, headPos.y), ImVec2(boxBottomPos.x, boxBottomPos.y), conf_TracerColor);
 
             if (conf_DrawName)
                 pDrawList->AddText(ImVec2(boxTopPos.x - (height / 3), boxTopPos.y - 8), conf_TextColor, name);
