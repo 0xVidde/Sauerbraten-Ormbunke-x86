@@ -15,4 +15,5 @@ public:
 	static int HEXtoDEC(uintptr_t hexVal);
     static ImVec2 GetWindowRes();
 	static void TypewriterPrint(std::string msg, int speed);
+	static BOOL IsInFullscreen();
 };

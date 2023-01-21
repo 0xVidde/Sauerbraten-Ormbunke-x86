@@ -16,6 +16,36 @@ int Utils::HEXtoDEC(uintptr_t hexVal) {
 	return atoi(stream.str().c_str());
 }
 
+BOOL Utils::IsInFullscreen() {
+    // Get the handle to the foreground window
+    HWND foregroundWindow = GetForegroundWindow();
+    if (foregroundWindow == NULL) {
+        return FALSE;
+    }
+
+    // Get the dimensions of the screen
+    RECT screenRect;
+    if (!GetClientRect(GetDesktopWindow(), &screenRect)) {
+        return FALSE;
+    }
+
+    // Get the dimensions of the foreground window
+    RECT windowRect;
+    if (!GetWindowRect(foregroundWindow, &windowRect)) {
+        return FALSE;
+    }
+
+    // Compare the dimensions of the window to the dimensions of the screen
+    if (windowRect.right == screenRect.right &&
+        windowRect.bottom == screenRect.bottom &&
+        windowRect.left == screenRect.left &&
+        windowRect.top == screenRect.top) {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 BOOL CALLBACK enumWind(HWND handle, LPARAM lp) {
     DWORD procId;
     GetWindowThreadProcessId(handle, &procId);
@@ -33,7 +63,13 @@ ImVec2 Utils::GetWindowRes() {
     RECT size;
     GetWindowRect(window, &size);
 
-    return ImVec2(size.right - size.left - 5, size.bottom - size.top - 29);
+    ImVec2 res;
+    if (!IsInFullscreen())
+        res = ImVec2(size.right - size.left - 5, size.bottom - size.top - 29);
+    else
+        res = ImVec2(size.right - size.left, size.bottom - size.top);
+
+    return res;
 }
 
 // I hope this is a safe way to do it

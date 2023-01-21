@@ -40,7 +40,10 @@ void Aimbot(LocalPlayer* localPlayer) {
 
     Player* closestPlayer = localPlayer->GetClosestEnemy();
 
-    if (localPlayer->GetHealth() < 1)
+    if (!closestPlayer)
+        return;
+
+    if (closestPlayer->GetHealth() < 1)
         return;
 
     if (closestPlayer && GetAsyncKeyState(VK_SHIFT)) {
@@ -165,6 +168,9 @@ void RenderMain()
                     ImVec2(headScreenPos.x + (height * 2.5), headScreenPos.y),
                     ImVec2(bodyScreenPos.x - (height * 2.5), bodyScreenPos.y),
                     conf_FilledBoxColor);
+
+            // Working On Head Circle
+            // pDrawList->AddCircle(ImVec2(player->GetHeadPosition().x, player->GetHeadPosition().y), 6 / (dist / 100), ImColor(255, 255, 255));
 
             if (conf_DrawName)
                 pDrawList->AddText(ImVec2(headScreenPos.x - (height / 3), headScreenPos.y - 8), conf_TextColor, name);
