@@ -23,10 +23,18 @@ void HackThread(HMODULE hModule) {
     Utils::TypewriterPrint("[NUM 2] << Box ESP\n", 60);
     Utils::TypewriterPrint("[NUM 3] << Tracer ESP\n", 60);
     Utils::TypewriterPrint("[NUM 4] << Name ESP\n", 60);
-    Utils::TypewriterPrint("[NUM 5] << Toggle Aimbot (Left Shift)\n\n", 60);
+    Utils::TypewriterPrint("[NUM 5] << Head Circle ESP\n", 60);
+    Utils::TypewriterPrint("[NUM 6] << Spine ESP\n", 60);
+    Utils::TypewriterPrint("[NUM 7] << FOV Circle\n\n", 60);
+
+    Utils::TypewriterPrint("[NUM 8] << Toggle FOV Aimbot (Left Shift)\n", 60);
+    Utils::TypewriterPrint("[NUM 9] << Toggle Aimbot (Left Shift)\n\n", 60);
 
     Utils::TypewriterPrint("[Up Arrow] << Increase Aimbot Smoothness\n", 60);
     Utils::TypewriterPrint("[Down Arrow] << Decrease Aimbot Smoothness\n\n", 60);
+    Utils::TypewriterPrint("[Right Arrow] << Increase Aimbot FOV\n", 60);
+    Utils::TypewriterPrint("[Left Arrow] << Decrease Aimbot FOV\n\n", 60);
+
     Utils::TypewriterPrint("[END] << Close\n", 43);
     Utils::TypewriterPrint("----------------\n", 43);
 

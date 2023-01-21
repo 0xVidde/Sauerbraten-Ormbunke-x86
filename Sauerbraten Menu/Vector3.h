@@ -38,10 +38,23 @@ struct Vector3
 		return result;
 	}
 
+	Vector3 Abs() {
+		this->x = fabsf(this->x);
+		this->y = fabsf(this->y);
+		this->z = fabsf(this->z);
+
+		return *this;
+	}
+
 	float Distance(const Vector3& o)
 	{
 		Vector3 self(this->x, this->y, this->z);
 		Vector3 diff = self - o;
 		return sqrt((diff.x * diff.x) + (diff.y * diff.y) + (diff.z * diff.z));
+	}
+
+	float Length3D() const
+	{
+		return sqrt(x * x + y * y + z * z);
 	}
 };

@@ -3,6 +3,8 @@
 #include "Offsets.h"
 #include "Utils.h"
 
+#include <iostream>
+
 LocalPlayer* LocalPlayer::Get() {
 	uintptr_t modBase = (uintptr_t)GetModuleHandle("sauerbraten.exe");
 	LocalPlayer* p = (LocalPlayer*)*(uintptr_t*)(modBase + Offsets::dwLocalPlayer);
@@ -16,6 +18,10 @@ uintptr_t LocalPlayer::GetBaseMod() {
 
 int LocalPlayer::GetHealth() {
 	return Utils::HEXtoDEC(this->Health);
+}
+
+int LocalPlayer::GetFOV() {
+    return *(int*)(this->GetBaseMod() + Offsets::dwFOV);
 }
 
 int LocalPlayer::GetArmor() {
@@ -77,6 +83,50 @@ Player* LocalPlayer::GetClosestEnemy() {
 
         if (this->HeadPosition.Distance(player->GetHeadPosition()) < closestDitance) {
             closestDitance = this->HeadPosition.Distance(player->GetHeadPosition());
+            closesDistanceIndex = i;
+        }
+    }
+
+    if (closesDistanceIndex == -1)
+        return NULL;
+
+    return Player::GetPlayer(closesDistanceIndex);
+}
+
+Player* LocalPlayer::GetClosestEnemyByFov(float fov) {
+    float closestAngle = 1000000;
+    int closesDistanceIndex = -1;
+
+    uintptr_t entityList = *(uintptr_t*)(this->GetBaseMod() + Offsets::dwEntityList);
+
+    for (size_t i = 0; i < Player::GetPlayerCount(); i++)
+    {
+        Player* player = Player::GetPlayer(i);
+
+        if (!player || player == NULL || player == nullptr)
+            continue;
+
+        if ((uintptr_t)player == (uintptr_t)this)
+            continue;
+
+        if (player->GetHealth() < 1)
+            continue;
+
+        Vector2 diffs = (Math::CalcAngle(this->HeadPosition, player->GetHeadPosition()) - this->ViewAngles).Abs();
+
+        if (diffs.x > 180)
+            diffs.x -= 360;
+
+        if (diffs.x < -180)
+            diffs.x += 360;
+
+        std::cout << diffs.Length2D() << std::endl;
+
+        if (diffs.Length2D() > fov)
+            continue;
+
+        if (diffs.Length2D() < closestAngle) {
+            closestAngle = diffs.Length2D();
             closesDistanceIndex = i;
         }
     }

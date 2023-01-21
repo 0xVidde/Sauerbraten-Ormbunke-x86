@@ -9,12 +9,12 @@ Vector2 Math::CalcAngle(Vector3 src, Vector3 dst)
 	return angle;
 }
 
-static float Math::DegreeToRadian(float degree)
+float Math::DegreeToRadian(float degree)
 {
 	return degree * (3.14 / 180);
 }
 
-static Vector3 Math::DegreeToRadian(Vector3 degrees)
+Vector3 Math::DegreeToRadian(Vector3 degrees)
 {
 	Vector3 radians;
 	radians.x = degrees.x * (3.14 / 180);

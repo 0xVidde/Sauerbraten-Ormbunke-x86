@@ -30,4 +30,16 @@ struct Vector2
 		result.y = o.y - this->y;
 		return result;
 	}
+
+	Vector2 Abs() {
+		this->x = fabsf(this->x);
+		this->y = fabsf(this->y);
+
+		return *this;
+	}
+
+	float Length2D() const
+	{
+		return sqrt(x * x + y * y);
+	}
 };

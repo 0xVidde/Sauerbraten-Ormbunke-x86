@@ -25,8 +25,12 @@ public:
 	void AimAtSmooth(Vector3 pos, float smooth);
 
 	Player* GetClosestEnemy();
+	Player* GetClosestEnemyByFov(float fov);
+
 	void TeleportTo(Vector3 pos);
 	ViewMatrix GetViewMatrix();
+
+	int GetFOV();
 
 	// suiiii
 	void FlyInCameraDir(float speed);
